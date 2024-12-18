@@ -9,11 +9,11 @@ Installation
 Follow the steps below to set up the environment:
 
 ### Create a workspace and clone the repository
-"""
+'''
 mkdir -p rosbot_ws/src
 cd rosbot_ws
 git clone https://github.com/husarion/rosbot_xl_ros src/
-"""
+'''
 
 ### Update and install dependencies
 sudo apt-get update
@@ -35,83 +35,94 @@ colcon build --symlink-install
 echo 'source ~/rosbot_ws/install/setup.bash' >> ~/.bashrc
 source ~/.bashrc
 
+-----------------------
+
 ### Practicing ROS 2 Navigation
-### Running the Simulator
-### Launch the simulation robot:
+#### Running the Simulator
+#### Terminal 1:  Launch the simulation robot:
 ros2 launch rosbot_xl_gazebo simulation.launch.py
 
-### Teleop control (keyboard control):
+#### Terminal 2:  Teleop control (keyboard control):
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
-### Visualize in Rviz:
+#### Terminal 3:  Visualize in Rviz:
 rviz2
 
-### In Rviz, add the RobotModel plugin and set its topic to /robot_description.
+-----------------------
+
 ### Mapping (SLAM Toolbox)
-### Launch the simulation robot:
+#### Terminal 1: Launch the simulation robot:
 ros2 launch rosbot_xl_gazebo simulation.launch.py
 
 
-### Start SLAM Toolbox:
+#### Terminal 2:  Start SLAM Toolbox:
 ros2 launch robot_navigation slam.launch.py use_sim_time:=true
 
-### Visualize in Rviz:
+#### Terminal 3:  Visualize in Rviz:
 rviz2
 
-### Teleop control:
+#### Terminal 4: Teleop control:
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
-### Save the map:
+#### Terminal 5: Save the map:
 ros2 run nav2_map_server map_saver_cli -f map
 
+------------------------------------
+
 ### Loading a Saved Map
-### Start the Map Server:
+#### Terminal 1:  Start the Map Server:
 ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=map.yaml -p use_sim_time:=true
 
-### Bring up the Map Server Lifecycle Node:
+#### Terminal 2:  Bring up the Map Server Lifecycle Node:
 ros2 run nav2_util lifecycle_bringup map_server
 
+-------------------------------------
+
 ### Localization (AMCL)
-### Launch the simulation robot:
+#### Terminal 1: Launch the simulation robot:
 ros2 launch rosbot_xl_gazebo simulation.launch.py
 
-### Run AMCL:
+#### Terminal 2: Run AMCL:
 ros2 launch robot_navigation amcl.launch.py use_sim_time:=true
 
-### Visualize in Rviz:
+#### Terminal 3: Visualize in Rviz:
 rviz2
 
-### Add ParticleCloud and select the /particle_cloud topic.
-### Use the 2D Pose Estimate tool to set the robot's initial pose.
+#### Note: Add ParticleCloud and select the /particle_cloud topic. Use the 2D Pose Estimate tool to set the robot's initial pose.
+
+------------------------------
+
 ### Navigation
-### Launch the simulation robot:
+#### Terminal 1: Launch the simulation robot:
 ros2 launch rosbot_xl_gazebo simulation.launch.py
 
-### Visualize in Rviz:
+#### Terminal 2: Visualize in Rviz:
 rviz2
 
-### Ensure the map topic is selected before launching NAV2.
-### Run NAV2:
+#### Note: Ensure the map topic is selected before launching NAV2.
+
+#### Terminal 3: Run NAV2:
 ros2 launch robot_navigation navigation.launch.py use_sim_time:=true
+
+--------------------------------
 
 ### Pole Detection and Midpoint Calculation
 ### This repository includes a custom algorithm to detect poles and calculate their midpoints using 3D LiDAR point cloud data.
 
-# Steps:
-# Launch the simulation robot with a custom poles environment:
+
+#### Terminal 1: Launch the simulation robot with a custom poles environment:
 ros2 launch rosbot_xl_gazebo simulation_poles.launch.py
 
-### Visualize in Rviz:
+#### Terminal 2: Visualize in Rviz:
 rviz2
 
-### Add PointCloud2 and RobotModel plugins.
-### Run the pole detection algorithm:
+#### Terminal 3: Run the pole detection algorithm:
 ros2 run find_poles_pkg pole_detection
 
-### Calculate the midpoint:
+#### Terminal 4: Calculate the midpoint:
 ros2 run find_poles_pkg midpoint
 
-### Teleop the robot:
+#### Terminal 5: Teleop the robot:
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 Notes
