@@ -1,0 +1,105 @@
+Tutorial followed:
+https://husarion.com/tutorials/ros2-tutorials/1-ros2-introduction/
+
+Installation:
+mkdir -p rosbot_ws/src
+cd rosbot_ws
+git clone https://github.com/husarion/rosbot_xl_ros src/
+sudo apt-get update
+sudo apt install ros-dev-tools
+vcs import src < src/rosbot_xl/rosbot_xl_hardware.repos
+vcs import src < src/rosbot_xl/rosbot_xl_simulation.repos
+sudo rosdep init
+rosdep update --rosdistro $ROS_DISTRO
+rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+colcon build --symlink-install
+echo 'source ~/rosbot_ws/install/setup.bash' >> ~/.bashrc
+
+
+Practicing ROS2 navigation and its individual components(Mapping, SLAM, NAV2) step by step.
+
+Running Simulator:
+T1 : Launch simulation robot
+ros2 launch rosbot_xl_gazebo simulation.launch.py
+
+T2 : Teleop control
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+T3 : Rviz Visualisation
+rviz2 
+
+Note: In order to visualise robot model in Rviz, select RobotModel and select topic as 'robot_description' inside it.
+
+
+Mapping:
+T1 : Launch simulation robot
+ros2 launch rosbot_xl_gazebo simulation.launch.py
+
+T2: SLAM_TOOLBOX
+ros2 launch robot_navigation slam.launch.py use_sim_time:=true
+
+T3 : Rviz Visualisation
+rviz2 
+
+T4 : Teleop control
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+T5: Save Map
+ros2 run nav2_map_server map_saver_cli -f map
+
+
+Loading Map Saved map:
+T1: Mapserver node
+ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=map.yaml -p use_sim_time:=true
+
+T2: Map_server Lifecycle node
+ros2 run nav2_util lifecycle_bringup map_server
+
+
+
+AMCL:(Localisation)
+T1 : Launch simulation robot
+ros2 launch rosbot_xl_gazebo simulation.launch.py
+
+T2: SLAM_TOOLBOX
+ros2 launch robot_navigation amcl.launch.py use_sim_time:=true
+
+T3 : Rviz Visualisation
+rviz2 
+
+Note: In order to visualize particle filters, Select ParticleCloud icon and inside select '/particle_cloud' topic. Then select '2D Pose Estimate' on map.
+
+
+NAVIGATION:
+T1 :
+ros2 launch rosbot_xl_gazebo simulation.launch.py
+
+T2 : Rviz Visualisation
+rviz2 
+
+NOTE: RUN RVIZ AND SELECT MAP TOPIC ON RVIZ, THEN RUN NAV@, BECAUSE THE NAV2 PUBLISHES MAP TOPIC ONLY ONCE
+
+T3: NAV2
+ros2 launch robot_navigation navigation.launch.py use_sim_time:=true
+
+
+Pole detection problem:
+Developing a noval algorithm to perform pole detection and mid-point calculation using 3D lidar pointcloud data.
+
+T1 : Robot simulation with custom poles environment.
+ros2 launch rosbot_xl_gazebo simulation_poles.launch.py
+
+T2 : Rviz  (Select pointcloud, Robotmodel etc)
+rviz
+
+T3: Pole detection algorithm
+ros2 run find_poles_pkg pole_detection
+
+T4: Mid-point calculation
+ros2 run find_poles_pkg midpoint
+
+T4: Teleop the robot 
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+
+
