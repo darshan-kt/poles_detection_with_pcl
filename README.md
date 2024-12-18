@@ -12,27 +12,27 @@ Follow the steps below to set up the environment:
 ### Create a workspace and clone the repository
 mkdir -p rosbot_ws/src \
 cd rosbot_ws \
-git clone https://github.com/husarion/rosbot_xl_ros src/ \
+git clone https://github.com/husarion/rosbot_xl_ros src/ 
 
 
 #### Update and install dependencies
-sudo apt-get update
+sudo apt-get update \
 sudo apt install ros-dev-tools
 
 #### Import hardware and simulation repositories
-vcs import src < src/rosbot_xl/rosbot_xl_hardware.repos
-vcs import src < src/rosbot_xl/rosbot_xl_simulation.repos
+vcs import src < src/rosbot_xl/rosbot_xl_hardware.repos \
+vcs import src < src/rosbot_xl/rosbot_xl_simulation.repos \
 
 #### Initialize rosdep and install dependencies
-sudo rosdep init
-rosdep update --rosdistro $ROS_DISTRO
-rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+sudo rosdep init \
+rosdep update --rosdistro $ROS_DISTRO \
+rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y 
 
 #### Build the workspace
 colcon build --symlink-install
 
 #### Add the workspace to the bashrc for easy sourcing
-echo 'source ~/rosbot_ws/install/setup.bash' >> ~/.bashrc
+echo 'source ~/rosbot_ws/install/setup.bash' >> ~/.bashrc \
 source ~/.bashrc
 
 -----------------------
