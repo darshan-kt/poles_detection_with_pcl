@@ -1,5 +1,5 @@
 
-### ROS 2 Navigation and Pole Detection Guide: \
+### ROS 2 Navigation and Pole Detection Guide: 
 This repository documents the process of setting up and practicing ROS 2 navigation components (Mapping, SLAM, AMCL, NAV2) step-by-step, as well as developing a novel pole detection algorithm using 3D LiDAR point cloud data.
 
 Tutorial Source: "The instructions in this repository are based on the Husarion ROS 2 Tutorial". Thanks to husarion for giving such a well documented repository. \
@@ -93,7 +93,7 @@ rviz2
 #### Terminal 3: Run NAV2:
 ros2 launch robot_navigation navigation.launch.py use_sim_time:=true
 
-![](https://github.com/darshan-kt/poles_detection_with_pcl/navigation.gif)
+![alt text](navigation.gif)
 
 --------------------------------
 
@@ -115,8 +115,6 @@ ros2 run find_poles_pkg midpoint
 
 #### Terminal 5: Teleop the robot:
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
-
-![](https://github.com/darshan-kt/poles_detection_with_pcl/pole_detection_algo-1.gif)
 
 ![alt text](pole_detection_algo-1.gif)
 
