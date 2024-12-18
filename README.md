@@ -2,11 +2,11 @@
 ROS 2 Navigation and Pole Detection Guide
 This repository documents the process of setting up and practicing ROS 2 navigation components (Mapping, SLAM, AMCL, NAV2) step-by-step, as well as developing a novel pole detection algorithm using 3D LiDAR point cloud data.
 
-Tutorial Source: "The instructions in this repository are based on the Husarion ROS 2 Tutorial". \
+Tutorial Source: "The instructions in this repository are based on the Husarion ROS 2 Tutorial". Thanks to husarion for giving such a well documented repository. \
 Please refer this tutorial link for more understanding https://husarion.com/tutorials/ros2-tutorials/1-ros2-introduction/
 
 
-Installation \
+Installation instruction: \
 Follow the steps below to set up the environment:
 
 ### Create a workspace and clone the repository
@@ -21,7 +21,7 @@ sudo apt install ros-dev-tools
 
 #### Import hardware and simulation repositories
 vcs import src < src/rosbot_xl/rosbot_xl_hardware.repos \
-vcs import src < src/rosbot_xl/rosbot_xl_simulation.repos \
+vcs import src < src/rosbot_xl/rosbot_xl_simulation.repos 
 
 #### Initialize rosdep and install dependencies
 sudo rosdep init \
