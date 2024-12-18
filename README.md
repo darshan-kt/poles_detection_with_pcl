@@ -118,6 +118,10 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 ![alt text](pole_detection_algo-1.gif)
 
+#### Note: Refer below youtube link where you can find this video.
+https://youtu.be/4Efh2HQmeR8
+
+
 #### Note: 
 Ensure the robot and Rviz are correctly configured for visualization.
 For NAV2, the map topic is published only once. Run Rviz and select the map topic before launching NAV2.
