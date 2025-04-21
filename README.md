@@ -10,91 +10,111 @@ Installation instruction: \
 Follow the steps below to set up the environment:
 
 ### Create a workspace and clone the repository
-'''bash
+```bash
 mkdir -p rosbot_ws/src \
 cd rosbot_ws \
 git clone https://github.com/darshan-kt/poles_detection_with_pcl.git \
 cd ~ rosbot_ws \
 rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y 
-'''
+```
 
 #### Build the workspace
+```bash
 cd ~ rosbot_ws \
 colcon build --symlink-install
+```
 
 #### Add the workspace to the bashrc for easy sourcing
+```bash
 echo 'source ~/rosbot_ws/install/setup.bash' >> ~/.bashrc \
 source ~/.bashrc
-
+```
 -----------------------
 
 ### Practicing ROS 2 Navigation
 #### Running the Simulator
 #### Terminal 1:  Launch the simulation robot:
+```bash
 ros2 launch rosbot_xl_gazebo simulation.launch.py
-
+```
 #### Terminal 2:  Teleop control (keyboard control):
+```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
-
+```
 #### Terminal 3:  Visualize in Rviz:
+```bash
 rviz2
-
+```
 -----------------------
 
 ### Mapping (SLAM Toolbox)
 #### Terminal 1: Launch the simulation robot:
+```bash
 ros2 launch rosbot_xl_gazebo simulation.launch.py
-
-
+```
 #### Terminal 2:  Start SLAM Toolbox:
+```bash
 ros2 launch robot_navigation slam.launch.py use_sim_time:=true
-
+```
 #### Terminal 3:  Visualize in Rviz:
+```bash
 rviz2
-
+```
 #### Terminal 4: Teleop control:
+```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
-
+```
 #### Terminal 5: Save the map:
+```bash
 ros2 run nav2_map_server map_saver_cli -f map
-
+```
 ------------------------------------
 
 ### Loading a Saved Map
 #### Terminal 1:  Start the Map Server:
+```bash
 ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=map.yaml -p use_sim_time:=true
-
+```
 #### Terminal 2:  Bring up the Map Server Lifecycle Node:
+```bash
 ros2 run nav2_util lifecycle_bringup map_server
-
+```
 -------------------------------------
 
 ### Localization (AMCL)
 #### Terminal 1: Launch the simulation robot:
+```bash
 ros2 launch rosbot_xl_gazebo simulation.launch.py
-
+```
 #### Terminal 2: Run AMCL:
+```bash
 ros2 launch robot_navigation amcl.launch.py use_sim_time:=true
-
+```
 #### Terminal 3: Visualize in Rviz:
+```bash
 rviz2
-
+```
 #### Note: Add ParticleCloud and select the /particle_cloud topic. Use the 2D Pose Estimate tool to set the robot's initial pose.
 
 ------------------------------
 
 ### Navigation
 #### Terminal 1: Launch the simulation robot:
+```bash
 ros2 launch rosbot_xl_gazebo simulation.launch.py
+```
 
 #### Terminal 2: Visualize in Rviz:
+```bash
 rviz2
+```
 
 #### Note: Ensure the map topic is selected before launching NAV2.
 
 #### Terminal 3: Run NAV2:
+```bash
 ros2 launch robot_navigation navigation.launch.py use_sim_time:=true
-
+```
 ![alt text](navigation.gif)
 
 --------------------------------
@@ -104,20 +124,25 @@ ros2 launch robot_navigation navigation.launch.py use_sim_time:=true
 
 
 #### Terminal 1: Launch the simulation robot with a custom poles environment:
+```bash
 ros2 launch rosbot_xl_gazebo simulation_poles.launch.py
-
+```
 #### Terminal 2: Visualize in Rviz:
+```bash
 rviz2
-
+```
 #### Terminal 3: Run the pole detection algorithm:
+```bash
 ros2 run find_poles_pkg pole_detection
-
+```
 #### Terminal 4: Calculate the midpoint:
+```bash
 ros2 run find_poles_pkg midpoint
-
+```
 #### Terminal 5: Teleop the robot:
+```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
-
+```
 ![alt text](pole_detection_algo-1.gif)
 
 #### Note: Refer below youtube link where you can find this video.
