@@ -10,11 +10,13 @@ Installation instruction: \
 Follow the steps below to set up the environment:
 
 ### Create a workspace and clone the repository
+'''bash
 mkdir -p rosbot_ws/src \
 cd rosbot_ws \
 git clone https://github.com/darshan-kt/poles_detection_with_pcl.git \
 cd ~ rosbot_ws \
 rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y 
+'''
 
 #### Build the workspace
 cd ~ rosbot_ws \
